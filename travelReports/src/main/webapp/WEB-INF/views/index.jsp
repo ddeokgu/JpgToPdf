@@ -26,23 +26,22 @@
 				<span>Remember Password</span>
 				<button class="submit">Login</button>
 			</form>
-			<form id="register" action="member/register.do" class="input-group">
-				<input type="text" class="input-field" placeholder="User name" required>
-				<input type="text" class="input-field" placeholder="Enter ID" required>
-				<input type="email" id ="inputEmail" class="input-field" placeholder="Your Email" required>
-				<input type="password" id="inputPassword" class="input-field" placeholder="Enter Password" required>
+			<form id="register" action="#" class="input-group">
+				<input type="text" class="input-field" name="member_name" placeholder="User name" required>
+				<input type="text" class="input-field" name="member_id" placeholder="Enter ID" required>
+				<input type="email" id ="inputEmail" name="member_email" class="input-field" placeholder="Your Email" required>
+				<input type="password" id="inputPassword" name="member_pwd" class="input-field" placeholder="Enter Password" required>
 				<button class="submit" onclick="regist(); return false;">REGISTER</button>
 			</form>
 		</div>
 	</div>
 </body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 	let x = document.getElementById("login");
 	let y = document.getElementById("register");
 	let z = document.getElementById("btn");
 
-	
-	
 	function changeLogin() {
 		x.style.left = "50px";
 		y.style.left = "450px";
@@ -82,6 +81,7 @@
 	}
 	
 	function regist() {
+		let params = $("#register").serialize();
 		let email = document.getElementById("inputEmail").value;
 		let password = document.getElementById("inputPassword").value;
 		let emailCheck = checkEmail(email);
@@ -94,10 +94,19 @@
 			alert("비밀번호는 최소 8자 이상, 문자와 숫자 조합입니다.");
 			return false;
 		}
+		$.ajax({
+			url : "member/regist.do",
+			type : "post",
+			data : params,
+			success: function (data) {
+	                if(data.success) {
+	                	alert("ok");
+	                	
+	                } else {
+	                	alert("no");
+	                }
+	            }
+		});
 	}
-	
-	
-		
-		 
 </script>
 </html>
