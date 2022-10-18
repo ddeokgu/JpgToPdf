@@ -1,4 +1,4 @@
-package com.thecar.jpgtopdf.HomeController;
+package com.thecar.jpgtopdf.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
